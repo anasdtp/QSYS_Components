@@ -37,7 +37,7 @@
    {
       datum _sortIndex
       {
-         value = "20";
+         value = "21";
          type = "int";
       }
       datum sopceditor_expanded
@@ -66,7 +66,7 @@
    {
       datum _sortIndex
       {
-         value = "24";
+         value = "25";
          type = "int";
       }
    }
@@ -74,7 +74,7 @@
    {
       datum _sortIndex
       {
-         value = "25";
+         value = "26";
          type = "int";
       }
    }
@@ -82,7 +82,7 @@
    {
       datum _sortIndex
       {
-         value = "22";
+         value = "23";
          type = "int";
       }
    }
@@ -105,6 +105,19 @@
       {
          value = "5";
          type = "int";
+      }
+   }
+   element kd
+   {
+      datum _sortIndex
+      {
+         value = "20";
+         type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "1";
+         type = "boolean";
       }
    }
    element kp
@@ -381,6 +394,19 @@
          type = "String";
       }
    }
+   element kd.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "4384";
+         type = "String";
+      }
+   }
    element sensor_data6.s1
    {
       datum _lockedAddress
@@ -517,7 +543,7 @@
    {
       datum _sortIndex
       {
-         value = "23";
+         value = "24";
          type = "int";
       }
    }
@@ -525,7 +551,7 @@
    {
       datum _sortIndex
       {
-         value = "21";
+         value = "22";
          type = "int";
       }
    }
@@ -655,6 +681,7 @@
    internal="base_speed.external_connection"
    type="conduit"
    dir="end" />
+ <interface name="kd" internal="kd.external_connection" type="conduit" dir="end" />
  <module kind="clock_source" version="13.0" enabled="1" name="clk_0">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -767,7 +794,7 @@
   <parameter name="tightlyCoupledInstructionMaster2AddrWidth" value="1" />
   <parameter name="tightlyCoupledInstructionMaster3AddrWidth" value="1" />
   <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x1000' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x1800' end='0x2000' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x1000' /><slave name='motor_left.s1' start='0x1000' end='0x1010' /><slave name='motor_right.s1' start='0x1010' end='0x1020' /><slave name='sensor_control.s1' start='0x1020' end='0x1030' /><slave name='sensor_status.s1' start='0x1030' end='0x1040' /><slave name='sensor_data0.s1' start='0x1040' end='0x1050' /><slave name='sensor_data1.s1' start='0x1050' end='0x1060' /><slave name='sensor_data2.s1' start='0x1060' end='0x1070' /><slave name='sensor_data3.s1' start='0x1070' end='0x1080' /><slave name='sensor_data4.s1' start='0x1080' end='0x1090' /><slave name='sensor_data5.s1' start='0x1090' end='0x10A0' /><slave name='sensor_data6.s1' start='0x10A0' end='0x10B0' /><slave name='kp.s1' start='0x10B0' end='0x10C0' /><slave name='base_speed.s1' start='0x10C0' end='0x10D0' /><slave name='fin_rot.s1' start='0x10D0' end='0x10E0' /><slave name='dir_rot.s1' start='0x10E0' end='0x10F0' /><slave name='start_rot.s1' start='0x10F0' end='0x1100' /><slave name='fin_sl.s1' start='0x1100' end='0x1110' /><slave name='start_sl.s1' start='0x1110' end='0x1120' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x1800' end='0x2000' /><slave name='switches.s1' start='0x2000' end='0x2010' /><slave name='LEDs.s1' start='0x2010' end='0x2020' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x2020' end='0x2028' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x1000' /><slave name='motor_left.s1' start='0x1000' end='0x1010' /><slave name='motor_right.s1' start='0x1010' end='0x1020' /><slave name='sensor_control.s1' start='0x1020' end='0x1030' /><slave name='sensor_status.s1' start='0x1030' end='0x1040' /><slave name='sensor_data0.s1' start='0x1040' end='0x1050' /><slave name='sensor_data1.s1' start='0x1050' end='0x1060' /><slave name='sensor_data2.s1' start='0x1060' end='0x1070' /><slave name='sensor_data3.s1' start='0x1070' end='0x1080' /><slave name='sensor_data4.s1' start='0x1080' end='0x1090' /><slave name='sensor_data5.s1' start='0x1090' end='0x10A0' /><slave name='sensor_data6.s1' start='0x10A0' end='0x10B0' /><slave name='kp.s1' start='0x10B0' end='0x10C0' /><slave name='base_speed.s1' start='0x10C0' end='0x10D0' /><slave name='fin_rot.s1' start='0x10D0' end='0x10E0' /><slave name='dir_rot.s1' start='0x10E0' end='0x10F0' /><slave name='start_rot.s1' start='0x10F0' end='0x1100' /><slave name='fin_sl.s1' start='0x1100' end='0x1110' /><slave name='start_sl.s1' start='0x1110' end='0x1120' /><slave name='kd.s1' start='0x1120' end='0x1130' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x1800' end='0x2000' /><slave name='switches.s1' start='0x2000' end='0x2010' /><slave name='LEDs.s1' start='0x2010' end='0x2020' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x2020' end='0x2028' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="deviceFamilyName" value="Cyclone IV E" />
   <parameter name="internalIrqMaskSystemInfo" value="32" />
@@ -1216,6 +1243,20 @@
   <parameter name="generateIRQ" value="false" />
   <parameter name="irqType" value="LEVEL" />
   <parameter name="resetValue" value="1856" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="12" />
+  <parameter name="clockRate" value="50000000" />
+ </module>
+ <module kind="altera_avalon_pio" version="13.0.1.99.2" enabled="1" name="kd">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="50" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="12" />
@@ -1802,6 +1843,22 @@
    version="13.0"
    start="nios2_qsys_0.jtag_debug_module_reset"
    end="base_speed.reset" />
+ <connection kind="reset" version="13.0" start="clk_0.clk_reset" end="kd.reset" />
+ <connection kind="clock" version="13.0" start="clocks.sys_clk" end="kd.clk" />
+ <connection
+   kind="avalon"
+   version="13.0"
+   start="nios2_qsys_0.data_master"
+   end="kd.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x1120" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="reset"
+   version="13.0"
+   start="nios2_qsys_0.jtag_debug_module_reset"
+   end="kd.reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
 </system>
