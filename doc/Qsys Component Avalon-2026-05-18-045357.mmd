@@ -1,0 +1,24 @@
+---
+config:
+  layout: fixed
+---
+flowchart LR
+ subgraph REG["REG"]
+    direction TB
+        SIG["• clock<br>• resetn<br>• readdata (16 bits)<br>• writedata (16 bits)<br>• read<br>• write<br>• byteenable (2 bits)<br>• chipselect"]
+  end
+ subgraph QSYS["QSYS"]
+    direction TB
+        REG
+        CONDUIT["Avalon Conduit Interface"]
+  end
+    QSYS --> NIOS["NIOS"]
+    NIOS --> QSYS
+    QSYS -- writedata --> SEG["7 segment-<br>display"]
+
+    style SIG fill:#f5f5f5,stroke:#f5f5f5,color:#000000
+    style REG fill:#f5f5f5,stroke:#000000,color:#000000
+    style CONDUIT fill:#ffffff,stroke:#000000,color:#000000
+    style QSYS fill:#ffffff,stroke:#000000,color:#000000
+    style NIOS fill:#ffffff,stroke:#000000,color:#000000
+    style SEG fill:#ffffff,stroke:#000000,color:#000000
