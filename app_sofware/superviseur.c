@@ -27,10 +27,10 @@
 #define IOWR(base, data) (*((volatile unsigned int*)(base)) = data)
 #define IORD(base)       (*((volatile unsigned int*)(base)))
 
-#define KP 100
+#define KP 300
 #define KD 18
-#define BASE_SPEED_RUN 1990
-#define BASE_SPEED_ROT 1990
+#define BASE_SPEED_RUN 1995
+#define BASE_SPEED_ROT 1995
 #define SENSOR_THRESHOLD 110
 
 typedef enum {

@@ -3,6 +3,7 @@
 	<PROJECT NAME="ROBOT">
 		<CBX_INST_ENTRY INSTANCE_NAME="|ROBOT|ctl_sl:PID_Controller|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_26h.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ROBOT|ctl_sl:PID_Controller|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:booth_adder_right" CBX_FILE_NAME="add_sub_9of.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ROBOT|ctl_sl:PID_Controller|lpm_mult:Mult1" CBX_FILE_NAME="mult_f4t.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ROBOT|nios_system_sdram:NiosII|nios_system_sdram_onchip_memory2_0:onchip_memory2_0|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_j4e1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ROBOT|nios_system_sdram:NiosII|nios_system_sdram_clocks:clocks|altpll:DE_Clock_Generator_System" CBX_FILE_NAME="altpll_6rb2.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ROBOT|nios_system_sdram:NiosII|nios_system_sdram_jtag_uart_0:jtag_uart_0|nios_system_sdram_jtag_uart_0_scfifo_w:the_nios_system_sdram_jtag_uart_0_scfifo_w|scfifo:wfifo" CBX_FILE_NAME="scfifo_jr21.tdf"/>
