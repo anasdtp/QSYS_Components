@@ -1,0 +1,159 @@
+-- Garbage / archive snippets
+-- Saved from ROBOT.vhd on 2026-05-18
+-- These blocks are kept for reference only. They are commented out on purpose.
+
+-- COMPONENT position_ligne
+-- PORT (
+-- 	clk         : IN STD_LOGIC;
+-- 	reset_n     : IN STD_LOGIC;
+-- 	sensor_ready: IN STD_LOGIC;
+-- 	sensor0     : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+-- 	sensor1     : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+-- 	sensor2     : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+-- 	sensor3     : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+-- 	sensor4     : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+-- 	sensor5     : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+-- 	sensor6     : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+-- 	position    : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+-- 	line_lost   : OUT STD_LOGIC );
+-- END COMPONENT;
+
+-- COMPONENT ctl_sl
+-- PORT (
+-- 	clk : IN STD_LOGIC;
+-- 	reset_n : IN STD_LOGIC;
+-- 	position_in : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+-- 	ready : IN STD_LOGIC;
+-- 	start_sl : IN STD_LOGIC;
+-- 	line_lost : IN STD_LOGIC;
+-- 	correction : OUT STD_LOGIC_VECTOR(13 DOWNTO 0);
+-- 	fin_sl : OUT STD_LOGIC;
+-- 	kp_in : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
+-- 	kd_in : IN STD_LOGIC_VECTOR(11 DOWNTO 0) );
+-- END COMPONENT;
+
+-- COMPONENT ctl_rot
+-- PORT (
+-- 	clk : IN STD_LOGIC;
+-- 	reset_n : IN STD_LOGIC;
+-- 	start_rot : IN STD_LOGIC;
+-- 	dir_rot : IN STD_LOGIC;
+-- 	position_in : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+-- 	line_lost : IN STD_LOGIC;
+-- 	ready : IN STD_LOGIC;
+-- 	fin_rot : OUT STD_LOGIC );
+-- END COMPONENT;
+
+-- Signals removed
+-- signal position_sig : STD_LOGIC_VECTOR(3 DOWNTO 0);
+-- signal line_lost_sig : STD_LOGIC;
+-- signal correction_sig : STD_LOGIC_VECTOR(13 DOWNTO 0);
+-- signal data_ready_sig : STD_LOGIC;
+-- signal data_capture_sig : STD_LOGIC;
+-- signal clk_div_counter : INTEGER range 0 to 24999 := 0;
+-- signal data_capture_2khz : STD_LOGIC := '0';
+-- constant THRESHOLD : unsigned(7 downto 0) := to_unsigned(110, 8);
+
+-- 2 KHz data_capture generation
+-- process(CLOCK_50, KEY(0))
+-- begin
+-- 	if KEY(0) = '0' then
+-- 		clk_div_counter <= 0;
+-- 		data_capture_2khz <= '0';
+-- 	elsif rising_edge(CLOCK_50) then
+-- 		if clk_div_counter = 24999 then
+-- 			clk_div_counter <= 0;
+-- 			data_capture_2khz <= NOT data_capture_2khz;
+-- 		else
+-- 			clk_div_counter <= clk_div_counter + 1;
+-- 		end if;
+-- 	end if;
+-- end process;
+-- data_capture_sig <= data_capture_2khz;
+
+-- Capteurs: capteurs_sol
+-- PORT MAP (
+-- 	clk => CLOCK_50,
+-- 	reset_n => KEY(0),
+-- 	data_capture => data_capture_sig,
+-- 	data_readyr => data_ready_sig,
+-- 	data0r => data0_sig,
+-- 	data1r => data1_sig,
+-- 	data2r => data2_sig,
+-- 	data3r => data3_sig,
+-- 	data4r => data4_sig,
+-- 	data5r => data5_sig,
+-- 	data6r => data6_sig,
+-- 	ADC_CONVSTr => LTC_ADC_CONVST,
+-- 	ADC_SCK => LTC_ADC_SCK,
+-- 	ADC_SDIr => LTC_ADC_SDI,
+-- 	ADC_SDO => LTC_ADC_SDO );
+
+-- Position: position_ligne
+-- PORT MAP (
+-- 	clk => CLOCK_50,
+-- 	reset_n => KEY(0),
+-- 	sensor_ready => data_ready_sig,
+-- 	sensor0 => data0_sig,
+-- 	sensor1 => data1_sig,
+-- 	sensor2 => data2_sig,
+-- 	sensor3 => data3_sig,
+-- 	sensor4 => data4_sig,
+-- 	sensor5 => data5_sig,
+-- 	sensor6 => data6_sig,
+-- 	position => position_sig,
+-- 	line_lost => line_lost_sig );
+
+-- PID_Controller: ctl_sl
+-- PORT MAP (
+-- 	clk => CLOCK_50,
+-- 	reset_n => KEY(0),
+-- 	position_in => position_sig,
+-- 	ready => data_ready_sig,
+-- 	start_sl => start_sl_sig,
+-- 	line_lost => line_lost_sig,
+-- 	correction => correction_sig,
+-- 	fin_sl => fin_sl_sig,
+-- 	kp_in => kp_sig,
+-- 	kd_in => kd_sig );
+
+-- Rotation_Controller: ctl_rot
+-- PORT MAP (
+-- 	clk => CLOCK_50,
+-- 	reset_n => KEY(0),
+-- 	start_rot => start_rot_sig,
+-- 	dir_rot => dir_rot_sig,
+-- 	position_in => position_sig,
+-- 	line_lost => line_lost_sig,
+-- 	ready => data_ready_sig,
+-- 	fin_rot => fin_rot_sig );
+
+-- LED debug process
+-- process(position_sig, start_sl_sig, fin_sl_sig)
+-- 	variable pos : signed(3 downto 0);
+-- 	variable led_next : std_logic_vector(7 downto 0);
+-- begin
+-- 	pos := signed(position_sig);
+-- 	led_next := (others => '0');
+-- 	case pos is
+-- 		when to_signed(-3, 4) =>
+-- 			led_next := "00000001";
+-- 		when to_signed(-2, 4) =>
+-- 			led_next := "00000010";
+-- 		when to_signed(-1, 4) =>
+-- 			led_next := "00000100";
+-- 		when to_signed(0, 4) =>
+-- 			led_next := "00001000";
+-- 		when to_signed(1, 4) =>
+-- 			led_next := "00010000";
+-- 		when to_signed(2, 4) =>
+-- 			led_next := "00100000";
+-- 		when to_signed(3, 4) =>
+-- 			led_next := "01000000";
+-- 		when others =>
+-- 			led_next := "00000000";
+-- 	end case;
+-- 	led_next(7) := start_sl_sig;
+-- 	led_next(6) := fin_sl_sig;
+-- 	LED <= led_next;
+-- end process;
