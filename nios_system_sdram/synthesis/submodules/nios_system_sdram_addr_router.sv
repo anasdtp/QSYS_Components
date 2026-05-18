@@ -190,13 +190,13 @@ module nios_system_sdram_addr_router
     // ( 0x0 .. 0x1000 )
     if ( {address[RG:PAD0],{PAD0{1'b0}}} == 27'h0   ) begin
             src_channel = 24'b010;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 10;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 9;
     end
 
     // ( 0x1800 .. 0x2000 )
     if ( {address[RG:PAD1],{PAD1{1'b0}}} == 27'h1800   ) begin
             src_channel = 24'b001;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 9;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 8;
     end
 
     // ( 0x4000000 .. 0x6000000 )

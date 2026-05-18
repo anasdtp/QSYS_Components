@@ -33,11 +33,24 @@
          type = "String";
       }
    }
+   element pwm_avalon_interface_0.avalon_slave_0
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "4096";
+         type = "String";
+      }
+   }
    element base_speed
    {
       datum _sortIndex
       {
-         value = "21";
+         value = "20";
          type = "int";
       }
       datum sopceditor_expanded
@@ -76,7 +89,7 @@
    {
       datum _sortIndex
       {
-         value = "25";
+         value = "24";
          type = "int";
       }
       datum sopceditor_expanded
@@ -89,7 +102,7 @@
    {
       datum _sortIndex
       {
-         value = "26";
+         value = "25";
          type = "int";
       }
       datum sopceditor_expanded
@@ -102,7 +115,7 @@
    {
       datum _sortIndex
       {
-         value = "23";
+         value = "22";
          type = "int";
       }
       datum sopceditor_expanded
@@ -136,7 +149,7 @@
    {
       datum _sortIndex
       {
-         value = "20";
+         value = "19";
          type = "int";
       }
       datum sopceditor_expanded
@@ -149,33 +162,7 @@
    {
       datum _sortIndex
       {
-         value = "19";
-         type = "int";
-      }
-      datum sopceditor_expanded
-      {
-         value = "0";
-         type = "boolean";
-      }
-   }
-   element motor_left
-   {
-      datum _sortIndex
-      {
-         value = "9";
-         type = "int";
-      }
-      datum sopceditor_expanded
-      {
-         value = "0";
-         type = "boolean";
-      }
-   }
-   element motor_right
-   {
-      datum _sortIndex
-      {
-         value = "8";
+         value = "18";
          type = "int";
       }
       datum sopceditor_expanded
@@ -210,30 +197,12 @@
          type = "boolean";
       }
    }
-   element sensor_data0.s1
+   element pwm_avalon_interface_0
    {
-      datum _lockedAddress
+      datum _sortIndex
       {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "4160";
-         type = "String";
-      }
-   }
-   element base_speed.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "4288";
-         type = "String";
+         value = "8";
+         type = "int";
       }
    }
    element start_sl.s1
@@ -246,123 +215,6 @@
       datum baseAddress
       {
          value = "4368";
-         type = "String";
-      }
-   }
-   element motor_right.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "4112";
-         type = "String";
-      }
-   }
-   element sensor_data1.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "4176";
-         type = "String";
-      }
-   }
-   element sensor_data4.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "4224";
-         type = "String";
-      }
-   }
-   element kp.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "4272";
-         type = "String";
-      }
-   }
-   element fin_sl.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "4352";
-         type = "String";
-      }
-   }
-   element sdram.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "67108864";
-         type = "String";
-      }
-   }
-   element sensor_data6.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "4256";
-         type = "String";
-      }
-   }
-   element sensor_data5.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "4240";
-         type = "String";
-      }
-   }
-   element motor_left.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "4096";
          type = "String";
       }
    }
@@ -379,6 +231,32 @@
          type = "String";
       }
    }
+   element fin_rot.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "4304";
+         type = "String";
+      }
+   }
+   element sensor_data6.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "4256";
+         type = "String";
+      }
+   }
    element onchip_memory2_0.s1
    {
       datum _lockedAddress
@@ -392,7 +270,7 @@
          type = "String";
       }
    }
-   element kd.s1
+   element sensor_status.s1
    {
       datum _lockedAddress
       {
@@ -401,11 +279,11 @@
       }
       datum baseAddress
       {
-         value = "4384";
+         value = "4144";
          type = "String";
       }
    }
-   element sensor_data2.s1
+   element kp.s1
    {
       datum _lockedAddress
       {
@@ -414,20 +292,7 @@
       }
       datum baseAddress
       {
-         value = "4192";
-         type = "String";
-      }
-   }
-   element switches.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "8192";
+         value = "4272";
          type = "String";
       }
    }
@@ -444,6 +309,32 @@
          type = "String";
       }
    }
+   element sensor_data4.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "4224";
+         type = "String";
+      }
+   }
+   element kd.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "4384";
+         type = "String";
+      }
+   }
    element LEDs.s1
    {
       datum _lockedAddress
@@ -457,7 +348,7 @@
          type = "String";
       }
    }
-   element fin_rot.s1
+   element sensor_data1.s1
    {
       datum _lockedAddress
       {
@@ -466,7 +357,20 @@
       }
       datum baseAddress
       {
-         value = "4304";
+         value = "4176";
+         type = "String";
+      }
+   }
+   element fin_sl.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "4352";
          type = "String";
       }
    }
@@ -496,7 +400,7 @@
          type = "String";
       }
    }
-   element sensor_status.s1
+   element sensor_data2.s1
    {
       datum _lockedAddress
       {
@@ -505,7 +409,72 @@
       }
       datum baseAddress
       {
-         value = "4144";
+         value = "4192";
+         type = "String";
+      }
+   }
+   element switches.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "8192";
+         type = "String";
+      }
+   }
+   element sdram.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "67108864";
+         type = "String";
+      }
+   }
+   element sensor_data5.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "4240";
+         type = "String";
+      }
+   }
+   element base_speed.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "4288";
+         type = "String";
+      }
+   }
+   element sensor_data0.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "4160";
          type = "String";
       }
    }
@@ -521,7 +490,7 @@
    {
       datum _sortIndex
       {
-         value = "10";
+         value = "9";
          type = "int";
       }
       datum sopceditor_expanded
@@ -534,7 +503,7 @@
    {
       datum _sortIndex
       {
-         value = "12";
+         value = "11";
          type = "int";
       }
       datum sopceditor_expanded
@@ -547,7 +516,7 @@
    {
       datum _sortIndex
       {
-         value = "13";
+         value = "12";
          type = "int";
       }
       datum sopceditor_expanded
@@ -560,7 +529,7 @@
    {
       datum _sortIndex
       {
-         value = "14";
+         value = "13";
          type = "int";
       }
       datum sopceditor_expanded
@@ -573,7 +542,7 @@
    {
       datum _sortIndex
       {
-         value = "15";
+         value = "14";
          type = "int";
       }
       datum sopceditor_expanded
@@ -586,7 +555,7 @@
    {
       datum _sortIndex
       {
-         value = "16";
+         value = "15";
          type = "int";
       }
       datum sopceditor_expanded
@@ -599,7 +568,7 @@
    {
       datum _sortIndex
       {
-         value = "17";
+         value = "16";
          type = "int";
       }
       datum sopceditor_expanded
@@ -612,7 +581,7 @@
    {
       datum _sortIndex
       {
-         value = "18";
+         value = "17";
          type = "int";
       }
       datum sopceditor_expanded
@@ -625,7 +594,7 @@
    {
       datum _sortIndex
       {
-         value = "11";
+         value = "10";
          type = "int";
       }
       datum sopceditor_expanded
@@ -638,7 +607,7 @@
    {
       datum _sortIndex
       {
-         value = "24";
+         value = "23";
          type = "int";
       }
       datum sopceditor_expanded
@@ -651,7 +620,7 @@
    {
       datum _sortIndex
       {
-         value = "22";
+         value = "21";
          type = "int";
       }
       datum sopceditor_expanded
@@ -683,7 +652,7 @@
  <parameter name="projectName" value="ROBOT.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1779091767339" />
+ <parameter name="timeStamp" value="1779095626078" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
@@ -698,16 +667,6 @@
    type="conduit"
    dir="end" />
  <interface name="sdram_wire" internal="sdram.wire" type="conduit" dir="end" />
- <interface
-   name="motor_left"
-   internal="motor_left.external_connection"
-   type="conduit"
-   dir="end" />
- <interface
-   name="motor_right"
-   internal="motor_right.external_connection"
-   type="conduit"
-   dir="end" />
  <interface name="sdram_clk" internal="clocks.sdram_clk" type="clock" dir="start" />
  <interface
    name="sensor_control"
@@ -786,6 +745,26 @@
    type="conduit"
    dir="end" />
  <interface name="kd" internal="kd.external_connection" type="conduit" dir="end" />
+ <interface
+   name="pwm_avalon_interface_0_conduit_p_r"
+   internal="pwm_avalon_interface_0.conduit_p_R"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="pwm_avalon_interface_0_conduit_p_l"
+   internal="pwm_avalon_interface_0.conduit_p_L"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="pwm_avalon_interface_0_conduit_n_r"
+   internal="pwm_avalon_interface_0.conduit_n_R"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="pwm_avalon_interface_0_conduit_n_l"
+   internal="pwm_avalon_interface_0.conduit_n_L"
+   type="conduit"
+   dir="end" />
  <module kind="clock_source" version="13.0" enabled="1" name="clk_0">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -898,7 +877,7 @@
   <parameter name="tightlyCoupledInstructionMaster2AddrWidth" value="1" />
   <parameter name="tightlyCoupledInstructionMaster3AddrWidth" value="1" />
   <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x1000' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x1800' end='0x2000' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x1000' /><slave name='motor_left.s1' start='0x1000' end='0x1010' /><slave name='motor_right.s1' start='0x1010' end='0x1020' /><slave name='sensor_control.s1' start='0x1020' end='0x1030' /><slave name='sensor_status.s1' start='0x1030' end='0x1040' /><slave name='sensor_data0.s1' start='0x1040' end='0x1050' /><slave name='sensor_data1.s1' start='0x1050' end='0x1060' /><slave name='sensor_data2.s1' start='0x1060' end='0x1070' /><slave name='sensor_data3.s1' start='0x1070' end='0x1080' /><slave name='sensor_data4.s1' start='0x1080' end='0x1090' /><slave name='sensor_data5.s1' start='0x1090' end='0x10A0' /><slave name='sensor_data6.s1' start='0x10A0' end='0x10B0' /><slave name='kp.s1' start='0x10B0' end='0x10C0' /><slave name='base_speed.s1' start='0x10C0' end='0x10D0' /><slave name='fin_rot.s1' start='0x10D0' end='0x10E0' /><slave name='dir_rot.s1' start='0x10E0' end='0x10F0' /><slave name='start_rot.s1' start='0x10F0' end='0x1100' /><slave name='fin_sl.s1' start='0x1100' end='0x1110' /><slave name='start_sl.s1' start='0x1110' end='0x1120' /><slave name='kd.s1' start='0x1120' end='0x1130' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x1800' end='0x2000' /><slave name='switches.s1' start='0x2000' end='0x2010' /><slave name='LEDs.s1' start='0x2010' end='0x2020' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x2020' end='0x2028' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x1000' /><slave name='pwm_avalon_interface_0.avalon_slave_0' start='0x1000' end='0x1004' /><slave name='sensor_control.s1' start='0x1020' end='0x1030' /><slave name='sensor_status.s1' start='0x1030' end='0x1040' /><slave name='sensor_data0.s1' start='0x1040' end='0x1050' /><slave name='sensor_data1.s1' start='0x1050' end='0x1060' /><slave name='sensor_data2.s1' start='0x1060' end='0x1070' /><slave name='sensor_data3.s1' start='0x1070' end='0x1080' /><slave name='sensor_data4.s1' start='0x1080' end='0x1090' /><slave name='sensor_data5.s1' start='0x1090' end='0x10A0' /><slave name='sensor_data6.s1' start='0x10A0' end='0x10B0' /><slave name='kp.s1' start='0x10B0' end='0x10C0' /><slave name='base_speed.s1' start='0x10C0' end='0x10D0' /><slave name='fin_rot.s1' start='0x10D0' end='0x10E0' /><slave name='dir_rot.s1' start='0x10E0' end='0x10F0' /><slave name='start_rot.s1' start='0x10F0' end='0x1100' /><slave name='fin_sl.s1' start='0x1100' end='0x1110' /><slave name='start_sl.s1' start='0x1110' end='0x1120' /><slave name='kd.s1' start='0x1120' end='0x1130' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x1800' end='0x2000' /><slave name='switches.s1' start='0x2000' end='0x2010' /><slave name='LEDs.s1' start='0x2010' end='0x2020' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x2020' end='0x2028' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="deviceFamilyName" value="Cyclone IV E" />
   <parameter name="internalIrqMaskSystemInfo" value="32" />
@@ -1021,42 +1000,6 @@
   <parameter name="registerDataIn" value="true" />
   <parameter name="clockRate" value="50000000" />
   <parameter name="componentName" value="$${FILENAME}_sdram" />
- </module>
- <module
-   kind="altera_avalon_pio"
-   version="13.0.1.99.2"
-   enabled="1"
-   name="motor_right">
-  <parameter name="bitClearingEdgeCapReg" value="false" />
-  <parameter name="bitModifyingOutReg" value="false" />
-  <parameter name="captureEdge" value="false" />
-  <parameter name="direction" value="Output" />
-  <parameter name="edgeType" value="RISING" />
-  <parameter name="generateIRQ" value="false" />
-  <parameter name="irqType" value="LEVEL" />
-  <parameter name="resetValue" value="0" />
-  <parameter name="simDoTestBenchWiring" value="false" />
-  <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="14" />
-  <parameter name="clockRate" value="50000000" />
- </module>
- <module
-   kind="altera_avalon_pio"
-   version="13.0.1.99.2"
-   enabled="1"
-   name="motor_left">
-  <parameter name="bitClearingEdgeCapReg" value="false" />
-  <parameter name="bitModifyingOutReg" value="false" />
-  <parameter name="captureEdge" value="false" />
-  <parameter name="direction" value="Output" />
-  <parameter name="edgeType" value="RISING" />
-  <parameter name="generateIRQ" value="false" />
-  <parameter name="irqType" value="LEVEL" />
-  <parameter name="resetValue" value="0" />
-  <parameter name="simDoTestBenchWiring" value="false" />
-  <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="14" />
-  <parameter name="clockRate" value="50000000" />
  </module>
  <module kind="altera_up_clocks" version="13.0" enabled="1" name="clocks">
   <parameter name="board" value="DE0-Nano" />
@@ -1366,6 +1309,11 @@
   <parameter name="width" value="12" />
   <parameter name="clockRate" value="50000000" />
  </module>
+ <module
+   kind="pwm_avalon_interface"
+   version="1.0"
+   enabled="1"
+   name="pwm_avalon_interface_0" />
  <connection
    kind="avalon"
    version="13.0"
@@ -1498,44 +1446,6 @@
    start="nios2_qsys_0.jtag_debug_module_reset"
    end="sdram.reset" />
  <connection
-   kind="reset"
-   version="13.0"
-   start="clk_0.clk_reset"
-   end="motor_right.reset" />
- <connection
-   kind="reset"
-   version="13.0"
-   start="clk_0.clk_reset"
-   end="motor_left.reset" />
- <connection
-   kind="avalon"
-   version="13.0"
-   start="nios2_qsys_0.data_master"
-   end="motor_right.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x1010" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="13.0"
-   start="nios2_qsys_0.data_master"
-   end="motor_left.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x1000" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="reset"
-   version="13.0"
-   start="nios2_qsys_0.jtag_debug_module_reset"
-   end="motor_left.reset" />
- <connection
-   kind="reset"
-   version="13.0"
-   start="nios2_qsys_0.jtag_debug_module_reset"
-   end="motor_right.reset" />
- <connection
    kind="clock"
    version="13.0"
    start="clk_0.clk"
@@ -1562,16 +1472,6 @@
    start="clocks.sys_clk"
    end="jtag_uart_0.clk" />
  <connection kind="clock" version="13.0" start="clocks.sys_clk" end="sdram.clk" />
- <connection
-   kind="clock"
-   version="13.0"
-   start="clocks.sys_clk"
-   end="motor_right.clk" />
- <connection
-   kind="clock"
-   version="13.0"
-   start="clocks.sys_clk"
-   end="motor_left.clk" />
  <connection
    kind="clock"
    version="13.0"
@@ -1968,6 +1868,25 @@
    version="13.0"
    start="clocks.sys_clk_reset"
    end="clk_0.clk_in_reset" />
+ <connection
+   kind="avalon"
+   version="13.0"
+   start="nios2_qsys_0.data_master"
+   end="pwm_avalon_interface_0.avalon_slave_0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x1000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="reset"
+   version="13.0"
+   start="nios2_qsys_0.jtag_debug_module_reset"
+   end="pwm_avalon_interface_0.reset_sink" />
+ <connection
+   kind="clock"
+   version="13.0"
+   start="clocks.sys_clk"
+   end="pwm_avalon_interface_0.clock_sink" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
 </system>
