@@ -1,106 +1,131 @@
+-- Implements a simple Nios II system for the DE-series board.
+-- Inputs: SW7-0 are parallel port inputs to the Nios II system.
+-- CLOCK_50 is the system clock.
+-- KEY0 is the active-low system reset.
+-- Outputs: LED7-0 are parallel port outputs from the Nios II system.
+-- SDRAM ports correspond to the SDRAM signals on the DE-series board.
 LIBRARY ieee;
- USE ieee.std_logic_1164.ALL;
- USE ieee.numeric_std.ALL;
- 
- ENTITY TOP_LEVEL IS
-	PORT (
-		 CLOCK_50  : IN STD_LOGIC;
-		 KEY       : IN STD_LOGIC_VECTOR (0 DOWNTO 0);
-		 LED       : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+USE ieee.std_logic_1164.all;
+USE ieee.numeric_std.all;
 
-		 DRAM_CLK, DRAM_CKE : OUT STD_LOGIC;
-		 DRAM_ADDR : OUT STD_LOGIC_VECTOR(12 DOWNTO 0);
-		 DRAM_BA   : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-		 DRAM_CS_N : OUT STD_LOGIC;
-		 DRAM_CAS_N: OUT STD_LOGIC;
-		 DRAM_RAS_N: OUT STD_LOGIC;
-		 DRAM_WE_N : OUT STD_LOGIC;
-		 DRAM_DQ   : INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 DRAM_DQM  : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-		 
-		 MTRL_N    : out std_logic;
-		 MTRL_P    : out std_logic;
-		 MTRR_N    : out std_logic;
-		 MTRR_P    : out std_logic;
-		 MTR_Fault_n 		: in std_logic;
-		 MTR_Sleep_n 		: out std_logic;
-		 
-		 LTC_ADC_CONVST	    : out std_logic;
-		 LTC_ADC_SCK	    : out std_logic;
-		 LTC_ADC_SDI	    : out std_logic;
-		 LTC_ADC_SDO	    : in  std_logic  ;
-		 
-		 VCC3P3_PWRON_n 	: out std_logic	 
-	);
- END TOP_LEVEL;
+ENTITY ROBOT IS
+PORT (
+	SW : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+	KEY : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+	CLOCK_50 : IN STD_LOGIC;
+	LED : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	DRAM_CLK, DRAM_CKE : OUT STD_LOGIC;
+	DRAM_ADDR : OUT STD_LOGIC_VECTOR(12 DOWNTO 0);
+	DRAM_BA : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+	DRAM_CS_N, DRAM_CAS_N, DRAM_RAS_N, DRAM_WE_N : OUT STD_LOGIC;
+	DRAM_DQ : INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+	DRAM_DQM : OUT STD_LOGIC_VECTOR(1 DOWNTO 0); 
+	-- Motor Driver DRV8848 interface
+	MTRR_P, MTRR_N : OUT STD_LOGIC;
+	MTRL_P, MTRL_N : OUT STD_LOGIC;
+	MTR_Sleep_n : OUT STD_LOGIC;
+	MTR_Fault_n : IN STD_LOGIC;
+	-- Sensor power control (A-Cute Car)
+	VCC3P3_PWRON_n : OUT STD_LOGIC;
+	IR_LED_ON : OUT STD_LOGIC;
+	-- ADC LTC2308 interface
+	LTC_ADC_CONVST : OUT STD_LOGIC;
+	LTC_ADC_SCK : OUT STD_LOGIC;
+	LTC_ADC_SDI : OUT STD_LOGIC;
+	LTC_ADC_SDO : IN STD_LOGIC );
+END ROBOT;
 
- ARCHITECTURE T_arch_rtl OF TOP_LEVEL IS
- 
- signal sig_posLigne : std_logic_vector(3 DOWNTO 0);
- signal clk_40MHZ, clk_2KHZ   : std_logic;
- 
- signal sig_data_capteur_brut : std_logic_vector(55 DOWNTO 0);
+ARCHITECTURE Structure OF ROBOT IS
 
-    component nios_system is
-        port (
-            clk_clk                   : in    std_logic                     := 'X';             -- clk
-            reset_reset_n             : in    std_logic                     := 'X';             -- reset_n
-            sdram_wire_addr           : out   std_logic_vector(12 downto 0);                    -- addr
-            sdram_wire_ba             : out   std_logic_vector(1 downto 0);                     -- ba
-            sdram_wire_cas_n          : out   std_logic;                                        -- cas_n
-            sdram_wire_cke            : out   std_logic;                                        -- cke
-            sdram_wire_cs_n           : out   std_logic;                                        -- cs_n
-            sdram_wire_dq             : inout std_logic_vector(15 downto 0) := (others => 'X'); -- dq
-            sdram_wire_dqm            : out   std_logic_vector(1 downto 0);                     -- dqm
-            sdram_wire_ras_n          : out   std_logic;                                        -- ras_n
-            sdram_wire_we_n           : out   std_logic;                                        -- we_n
-            sdram_clk_clk             : out   std_logic;                                        -- clk
-            pwm1_writeresponsevalid_n : out   std_logic;                                        -- writeresponsevalid_n
-            pwm2_writeresponsevalid_n : out   std_logic;                                        -- writeresponsevalid_n
-            pwm3_writeresponsevalid_n : out   std_logic;                                        -- writeresponsevalid_n
-            pwm4_writeresponsevalid_n : out   std_logic    ;                                     -- writeresponsevalid_n
-            adc_sdo_export            : in    std_logic                     := 'X';             -- export
-            adc_sdi_export            : out   std_logic;                                        -- export
-            adc_convst_export         : out   std_logic;                                        -- export
-            adc_sck_export            : out   std_logic                                         -- export
-      
-        );
-    end component nios_system;
-	
-	BEGIN
-	
-	u0: nios_system
-	PORT MAP (
-				clk_clk          => CLOCK_50,
-				reset_reset_n    => KEY(0),
-				sdram_clk_clk    => DRAM_CLK,
-				sdram_wire_addr  => DRAM_ADDR,
-				sdram_wire_ba    => DRAM_BA,
-				sdram_wire_cas_n => DRAM_CAS_N,
-				sdram_wire_cke   => DRAM_CKE,
-				sdram_wire_cs_n  => DRAM_CS_N,
-				sdram_wire_dq    => DRAM_DQ,
-				sdram_wire_dqm   => DRAM_DQM,
-				sdram_wire_ras_n => DRAM_RAS_N,
-				sdram_wire_we_n  => DRAM_WE_N,
-				pwm1_writeresponsevalid_n => MTRL_P,  -- dc_motor_p_L
-				pwm2_writeresponsevalid_n => MTRL_N,  -- dc_motor_n_L
-				pwm3_writeresponsevalid_n => MTRR_P,  -- dc_motor_p_R
-				pwm4_writeresponsevalid_n => MTRR_N,   -- dc_motor_n_R
-				adc_sdo_export            => LTC_ADC_SDO,            --    adc_sdo.export
-            adc_sdi_export            => LTC_ADC_SDI,            --    adc_sdi.export
-            adc_convst_export         => LTC_ADC_CONVST,         -- adc_convst.export
-            adc_sck_export            => LTC_ADC_SCK             --    adc_sck.export
-      
-		
+COMPONENT nios_system_sdram
+PORT (
+	clk_clk                   : IN STD_LOGIC;
+	sdram_wire_addr           : OUT STD_LOGIC_VECTOR(12 DOWNTO 0);
+	sdram_wire_ba             : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+	sdram_wire_cas_n          : OUT STD_LOGIC;
+	sdram_wire_cke            : OUT STD_LOGIC;
+	sdram_wire_cs_n           : OUT STD_LOGIC;
+	sdram_wire_dq             : INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+	sdram_wire_dqm            : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+	sdram_wire_ras_n          : OUT STD_LOGIC;
+	sdram_wire_we_n           : OUT STD_LOGIC;
+	sdram_clk_clk             : OUT STD_LOGIC;
+	pwm1_writeresponsevalid_n : OUT STD_LOGIC;
+	pwm2_writeresponsevalid_n : OUT STD_LOGIC;
+	pwm3_writeresponsevalid_n : OUT STD_LOGIC;
+	pwm4_writeresponsevalid_n : OUT STD_LOGIC;
+	reset_reset_n             : IN STD_LOGIC;
+	adc_convst_export         : OUT STD_LOGIC;
+	adc_sck_export            : OUT STD_LOGIC;
+	adc_sdi_export            : OUT STD_LOGIC;
+	adc_sdo_export            : IN STD_LOGIC );
+END COMPONENT;
 
-			); 
-			
+COMPONENT capteurs_sol
+PORT (
+	clk : IN STD_LOGIC;
+	reset_n : IN STD_LOGIC;
+	data_capture : IN STD_LOGIC;
+	data_readyr : OUT STD_LOGIC;
+	data0r : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	data1r : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	data2r : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	data3r : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	data4r : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	data5r : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	data6r : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	adc_convst_export : OUT STD_LOGIC;
+	adc_sck_export : OUT STD_LOGIC;
+	adc_sdi_export : OUT STD_LOGIC;
+	adc_sdo_export : IN STD_LOGIC );
+END COMPONENT;
+
+-- PWM outputs from Qsys component
+signal pwm1_sig : STD_LOGIC;
+signal pwm2_sig : STD_LOGIC;
+signal pwm3_sig : STD_LOGIC;
+signal pwm4_sig : STD_LOGIC;
+
+-- Instantiate the Nios II system entity generated by the Qsys tool.
+BEGIN
+NiosII: nios_system_sdram
+PORT MAP (
+	clk_clk => CLOCK_50,
+	sdram_wire_addr => DRAM_ADDR,
+	sdram_wire_ba => DRAM_BA,
+	sdram_wire_cas_n => DRAM_CAS_N,
+	sdram_wire_cke => DRAM_CKE,
+	sdram_wire_cs_n => DRAM_CS_N,
+	sdram_wire_dq => DRAM_DQ,
+	sdram_wire_dqm => DRAM_DQM,
+	sdram_wire_ras_n => DRAM_RAS_N,
+	sdram_wire_we_n => DRAM_WE_N,
+	sdram_clk_clk => DRAM_CLK,
+	pwm1_writeresponsevalid_n => pwm1_sig,
+	pwm2_writeresponsevalid_n => pwm2_sig,
+	pwm3_writeresponsevalid_n => pwm3_sig,
+	pwm4_writeresponsevalid_n => pwm4_sig,
+	reset_reset_n => KEY(0),
+	adc_convst_export => LTC_ADC_CONVST,
+	adc_sck_export => LTC_ADC_SCK,
+	adc_sdi_export => LTC_ADC_SDI,
+	adc_sdo_export => LTC_ADC_SDO );
+
+-- Direct connection from Qsys PWM conduit to motor driver pins
+MTRR_P <= pwm1_sig;
+MTRR_N <= pwm2_sig;
+MTRL_P <= pwm3_sig;
+MTRL_N <= pwm4_sig;
+
+LED <= (others => '0');
+
+-- Motor driver control signals
+MTR_Sleep_n <= '1'; -- Enable motor driver (active high)
+-- MTR_Fault_n is monitored but not used in current implementation
+
+-- Sensor power control (A-Cute Car)
+VCC3P3_PWRON_n <= '0'; -- Enable 3.3V power for sensors (active low)
+IR_LED_ON <= '1'; -- Enable IR LEDs for line sensors
 
 
-			
-	VCC3P3_PWRON_n <= '0';    
-	MTR_Sleep_n    <='1';   
-	--LED(6 downto 0)  <= sig_led(4 downto 0) & sig_pio_input(0) & sig_pio_input(2);-- when sig_pio_output(0) = '1' else
-	
- END T_arch_rtl;
+END Structure;

@@ -11,12 +11,12 @@
  </systemtable>
  <clocktable>
   <columns>
-   <clockname preferredWidth="439" />
-   <clocksource preferredWidth="438" />
-   <frequency preferredWidth="434" />
+   <clockname preferredWidth="438" />
+   <clocksource preferredWidth="437" />
+   <frequency preferredWidth="436" />
   </columns>
  </clocktable>
- <library expandedCategories="Project,Project/My Own IP Cores,Library" />
+ <library expandedCategories="Project,Library,Project/My Own IP Cores" />
  <window width="1616" height="868" x="-8" y="-8" />
  <generation path="_PROJECT_NAME_" />
  <hdlexample language="VHDL" />

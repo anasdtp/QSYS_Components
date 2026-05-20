@@ -47,23 +47,23 @@ module nios_system_sdram_addr_router_default_decode
      parameter DEFAULT_CHANNEL = 2,
                DEFAULT_WR_CHANNEL = -1,
                DEFAULT_RD_CHANNEL = -1,
-               DEFAULT_DESTID = 12 
+               DEFAULT_DESTID = 4 
    )
-  (output [93 - 89 : 0] default_destination_id,
-   output [25-1 : 0] default_wr_channel,
-   output [25-1 : 0] default_rd_channel,
-   output [25-1 : 0] default_src_channel
+  (output [89 - 87 : 0] default_destination_id,
+   output [5-1 : 0] default_wr_channel,
+   output [5-1 : 0] default_rd_channel,
+   output [5-1 : 0] default_src_channel
   );
 
   assign default_destination_id = 
-    DEFAULT_DESTID[93 - 89 : 0];
+    DEFAULT_DESTID[89 - 87 : 0];
 
   generate begin : default_decode
     if (DEFAULT_CHANNEL == -1) begin
       assign default_src_channel = '0;
     end
     else begin
-      assign default_src_channel = 25'b1 << DEFAULT_CHANNEL;
+      assign default_src_channel = 5'b1 << DEFAULT_CHANNEL;
     end
   end
   endgenerate
@@ -74,8 +74,8 @@ module nios_system_sdram_addr_router_default_decode
       assign default_rd_channel = '0;
     end
     else begin
-      assign default_wr_channel = 25'b1 << DEFAULT_WR_CHANNEL;
-      assign default_rd_channel = 25'b1 << DEFAULT_RD_CHANNEL;
+      assign default_wr_channel = 5'b1 << DEFAULT_WR_CHANNEL;
+      assign default_rd_channel = 5'b1 << DEFAULT_RD_CHANNEL;
     end
   end
   endgenerate
@@ -95,7 +95,7 @@ module nios_system_sdram_addr_router
     // Command Sink (Input)
     // -------------------
     input                       sink_valid,
-    input  [104-1 : 0]    sink_data,
+    input  [100-1 : 0]    sink_data,
     input                       sink_startofpacket,
     input                       sink_endofpacket,
     output                      sink_ready,
@@ -104,8 +104,8 @@ module nios_system_sdram_addr_router
     // Command Source (Output)
     // -------------------
     output                          src_valid,
-    output reg [104-1    : 0] src_data,
-    output reg [25-1 : 0] src_channel,
+    output reg [100-1    : 0] src_data,
+    output reg [5-1 : 0] src_channel,
     output                          src_startofpacket,
     output                          src_endofpacket,
     input                           src_ready
@@ -116,12 +116,12 @@ module nios_system_sdram_addr_router
     // -------------------------------------------------------
     localparam PKT_ADDR_H = 62;
     localparam PKT_ADDR_L = 36;
-    localparam PKT_DEST_ID_H = 93;
-    localparam PKT_DEST_ID_L = 89;
-    localparam PKT_PROTECTION_H = 97;
-    localparam PKT_PROTECTION_L = 95;
-    localparam ST_DATA_W = 104;
-    localparam ST_CHANNEL_W = 25;
+    localparam PKT_DEST_ID_H = 89;
+    localparam PKT_DEST_ID_L = 87;
+    localparam PKT_PROTECTION_H = 93;
+    localparam PKT_PROTECTION_L = 91;
+    localparam ST_DATA_W = 100;
+    localparam ST_CHANNEL_W = 5;
     localparam DECODER_TYPE = 0;
 
     localparam PKT_TRANS_WRITE = 65;
@@ -164,7 +164,7 @@ module nios_system_sdram_addr_router
     assign src_endofpacket   = sink_endofpacket;
 
     wire [PKT_DEST_ID_W-1:0] default_destid;
-    wire [25-1 : 0] default_src_channel;
+    wire [5-1 : 0] default_src_channel;
 
 
 
@@ -189,20 +189,20 @@ module nios_system_sdram_addr_router
 
     // ( 0x0 .. 0x1000 )
     if ( {address[RG:PAD0],{PAD0{1'b0}}} == 27'h0   ) begin
-            src_channel = 25'b010;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 11;
+            src_channel = 5'b010;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 3;
     end
 
     // ( 0x1800 .. 0x2000 )
     if ( {address[RG:PAD1],{PAD1{1'b0}}} == 27'h1800   ) begin
-            src_channel = 25'b001;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 10;
+            src_channel = 5'b001;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 2;
     end
 
     // ( 0x4000000 .. 0x6000000 )
     if ( {address[RG:PAD2],{PAD2{1'b0}}} == 27'h4000000   ) begin
-            src_channel = 25'b100;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 12;
+            src_channel = 5'b100;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 4;
     end
 
 end

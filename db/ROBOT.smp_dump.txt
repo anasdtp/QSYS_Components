@@ -1,5 +1,5 @@
 
-State Machine - |ROBOT|capteurs_sol:Capteurs|State
+State Machine - |ROBOT|nios_system_sdram:NiosII|capteurs_avalon_interface:capteurs_avalon_interface_0|capteurs_sol_seuil:capteurs_inst|State
 Name State.S7 State.S6 State.S5 State.S4 State.S3 State.S2 State.S1 State.S0 
 State.S0 0 0 0 0 0 0 0 0 
 State.S1 0 0 0 0 0 0 1 1 
